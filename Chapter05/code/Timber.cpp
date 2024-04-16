@@ -26,6 +26,11 @@ int main()
 	// Create and open a window for the game
 	RenderWindow window(vm, "Timber!!!!", Style::Default);
 
+	View view;
+	view.setSize(1920.0, 1080.0);
+	view.setCenter(1920.0 / 2.0, 1080.0 / 2.0);
+	window.setView(view);
+
 	// Create a texture to hold a graphic on the GPU
 	Texture textureBackground;
 
@@ -208,6 +213,7 @@ int main()
 		Event event;
 		while (window.pollEvent(event))
 		{
+			if (event.type == sf::Event::Closed) window.close();
 			if (event.type == Event::KeyReleased && !paused)
 			{
 				// Listen for key presses again
@@ -514,6 +520,7 @@ int main()
 
 		// Clear everything from the last frame
 		window.clear();
+		window.setView(view);
 
 		// Draw our game scene here
 		window.draw(spriteBackground);
